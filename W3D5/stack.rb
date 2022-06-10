@@ -1,20 +1,21 @@
 class Stack
 
     def initialize
-        @stack_ivar = []
+        @stack = []
     end
 
     def push(el)
-        @stack_ivar << el
+        @stack << el
 
     end
 
+
     def pop
-        @stack_ivar = @stack_ivar[0...-1]
+        @stack = @stack[0...-1]
     end
 
     def peek
-        @stack_ivar[-1]
+        @stack[-1]
     end
 
 
