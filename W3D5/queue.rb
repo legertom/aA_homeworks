@@ -10,11 +10,16 @@ class Queue
     end
 
     def dequeue
-        @queue.shift
+        @queue = @queue[1..-1]
+        #@queue.shift
     end
 
     def peek
         @queue[0]
+    end
+
+    def show
+        @queue.dup
     end
 
 end

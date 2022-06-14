@@ -11,6 +11,7 @@ class Stack
 
 
     def pop
+        @stack[-1]
         @stack = @stack[0...-1]
     end
 
@@ -18,6 +19,9 @@ class Stack
         @stack[-1]
     end
 
+    def inspect
+        "#Stack = #{self.object_id}"
+    end
 
 
 end
