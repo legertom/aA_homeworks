@@ -16,26 +16,42 @@ class Board
   end
 
   def valid_move?(start_pos)
-    raise 'Error invalid starting cup' if @cups[start_pos] > 14 || @cups[start_pos] < 1
-    raise 'Starting cup is empty' if start_pos.empty?
+    raise 'Invalid starting cup' if start_pos > 12 || start_pos < 0
+    raise 'Starting cup is empty' if @cups[start_pos].empty?
   end
 
   def make_move(start_pos, current_player_name)
-    current_cup = @cups[start_pos]
-    if !current_cup.empty?
-        #distribute stones
-        (1..current_cup.length).each do |i|
-          @cups[start_pos+1] << :stone
-
-        end
-        @cups[start_pos] = []
+    stones = @cups[start_pos]
+    @cups[start_pos] = []
+    cup_index = start_pos
+    until stones.empty?
+      cup_index +=1
+      cup_index = cup_index % 14
+      case cup_index
+      when 6 
+        @cups[cup_index] << stones.pop if current_player_name == @name1
+      when 13
+        @cups[cup_index] << stones.pop if current_player_name == @name2
+      else
+        @cups[cup_index] << stones.pop
+      end
     end
-    cups[start_pos] = []
     
+    render
+    next_turn(cup_index)
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
+    if @cups[ending_cup_idx].empty?
+      :switch
+    elsif @cups[ending_cup_idx] == 6 && current_player_name == @name1
+      :prompt
+    elsif @cups[ending_cup_idx] == 13 && current_player_name == @name2
+      :prompt
+    elsif @cups[ending_cup_idx].size > 0
+      ending_cup_idx
+    end
   end
 
   def render
@@ -47,20 +63,21 @@ class Board
   end
 
   def one_side_empty?
-   return true if @cups[6].empty? || @cups[13].empty?
-   return false if !@cups[6].empty? && !@cups[13].empty?
+   @cups[0..5].all? { |cup| cup.empty?} || @cups[7..12].all? { |cup| cup.empty?}
   end
 
   def winner
-    if self.one_side_empty?
-      if @cups[6].empty? && @cups[13].empty?
-        return :draw
-      elsif @cups[6].empty? && !@cups[13].empty?
-        return @name1
-      else
-        return @name2
-      end
+    player1_score = @cups[6].count
+    player2_score = @cups[13].count
 
+    case player1_score <=> player2_score
+    when -1
+      @name2
+    when 0
+      :draw
+    when 1
+      @name1
     end
+
   end
 end
