@@ -36,7 +36,6 @@ class Board
         @cups[cup_index] << stones.pop
       end
     end
-    
     render
     next_turn(cup_index)
   end
