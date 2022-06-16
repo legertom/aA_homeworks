@@ -38,6 +38,9 @@ describe Dessert do
 
   describe "#eat" do
     it "subtracts an amount from the quantity" do
+      expect(dessert.quantity).to eq(100)
+      dessert.eat(10)
+      expect(dessert.quantity).to eq(90)
 
     it "raises an error if the amount is greater than the quantity" do
       expect(dessert.amount<=dessert.quantity).to raise_error('Amount must be smaller than quantity')
@@ -45,11 +48,11 @@ describe Dessert do
 
   describe "#serve" do
     it "contains the titleized version of the chef's name" do
-      expect(dessert.serve).to 
+      expect(dessert.serve).to include(chef.titlize)
   end
 
   describe "#make_more" do
     it "calls bake on the dessert's chef with the dessert passed in" do
-      expect(dessert.make_more)
+      expect(dessert.make_more).to include(chef.bake(dessert.type))
   end
 end
