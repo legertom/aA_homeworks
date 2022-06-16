@@ -31,12 +31,20 @@ class Simon
 
   def show_sequence
     add_random_color
+    @seq.each do |color|
+      puts color
+    end
    
 
   end
 
   def require_sequence
-
+    puts "Enter current sequence"
+    entry = gets.chomp
+    user_guess = entry.split
+    if @seq != user_guess
+      @game_over = true
+    end
   end
 
   def add_random_color
@@ -45,6 +53,7 @@ class Simon
   end
 
   def round_success_message
+    puts "You did it!"
 
   end
 
