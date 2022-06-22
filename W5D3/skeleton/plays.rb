@@ -20,11 +20,14 @@ class Play
   end
 
   def self.find_by_title(title)
+    data = PlayDBConnection.instance.execute("SELECT *  FROM plays WHERE title=#{title}")
+    data.map { |datum| Play.new(datum) }
 
   end
 
   def self.find_by_playwright(name)
-
+    data = PlayDBConnection.instance.execute("SELECT * FROM plays WHERE playwright_id =#{playwright_id}")
+    data.map { |datum| Play.new(datum) }
   end
 
   def initialize(options)
