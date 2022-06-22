@@ -19,6 +19,14 @@ class Play
     data.map { |datum| Play.new(datum) }
   end
 
+  def self.find_by_title(title)
+
+  end
+
+  def self.find_by_playwright(name)
+
+  end
+
   def initialize(options)
     @id = options['id']
     @title = options['title']
