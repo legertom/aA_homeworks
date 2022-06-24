@@ -23,8 +23,8 @@
 
 def find_angelina
   #find Angelina Jolie by name in the actors table
-  angelina = Actor.where('name = ?', 'Angelina Jolie')
-  angelina.to_a
+ Actor.find_by(name: 'Angelina Jolie')
+  
   
 
 end
@@ -68,7 +68,10 @@ def pulp_fiction_actors
   # practice using joins
   # display the id and name of all actors in the movie Pulp Fiction
   # hint: use 'select', 'joins', 'where'
-  pulp_actors = Actor.joins.(:movies, :castings).select(:id,:name).where('title = ?', 'Pulp Fiction')
+  Actor
+  .select(:id,:name)
+  .joins(:movies)
+  .where('title = \'Pulp Fiction\'')
 
 end
 
@@ -77,5 +80,9 @@ def uma_movies
   # display the id, title, and year of movies Uma Thurman has acted in
   # order them by ascending year
   # hint: use 'select', 'joins', 'where', and 'order'
+  Movie
+  .select(:id, :title, :yr)
+  .joins(:actors)
+  .where('name = ?', 'Uma Thurman')
 
 end
