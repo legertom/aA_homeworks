@@ -23,18 +23,24 @@
 
 def find_angelina
   #find Angelina Jolie by name in the actors table
+  angelina = Actor.where('name = ?', 'Angelina Jolie')
+  angelina.to_a
+  
 
 end
 
 def top_titles
   # get movie titles from movies with scores greater than or equal to 9
   # hint: use 'select' and 'where'
+  good_movies = Movie.select(:id, :title).where('score >= ?', '9')
+
 
 end
 
 def star_wars
   #display the id, title and year of each Star Wars movie in movies.
   # hint: use 'select' and 'where'
+  star_warses = Movie.select(:id,:title,:yr).where('title LIKE ?', 'Star Wars%')
 
 end
 
@@ -45,6 +51,7 @@ def below_average_years
   #in descending order
   # hint: use 'select', 'where', 'group', 'order'
 
+  baddies = Movie.select('COUNT(*) AS bad_movies', :yr).where('score < ?', '5').group(:yr).order('yr DESC')
 end
 
 def alphabetized_actors
@@ -53,6 +60,7 @@ def alphabetized_actors
   # Note: Ubuntu users may find that special characters
   # are alphabetized differently than the specs.
   # This spec might fail for Ubuntu users. It's ok!
+first_ten = Actor.select(:id, :name).order('name ASC').limit(10)
 
 end
 
@@ -60,6 +68,7 @@ def pulp_fiction_actors
   # practice using joins
   # display the id and name of all actors in the movie Pulp Fiction
   # hint: use 'select', 'joins', 'where'
+  pulp_actors = Actor.joins.(:movies, :castings).select(:id,:name).where('title = ?', 'Pulp Fiction')
 
 end
 
