@@ -50,6 +50,31 @@ function alert_cb(){
 // });
 // Next, write out your function. You should use the reader.question method to prompt the reader if they'd like some tea. reader.question takes two arguments: a string (this is where you ask your question) and a callback function. The callback function takes one argument: the user's response.This is passed in when the user responds to the prompt and hits enter.
 
+function wanna_tea(){
+    const readline = require('readline');
+
+    const reader = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let first, second;
+reader.question(`Would you like some tea?`, (res)) => {
+    first = res;
+    console.log(`You replied ${res}`;
+}
+
+    reader.question(`Would you like some biscuits?`, res) => {
+        second = res;
+        console.log(`You replied ${res}`);
+    }
+
+    const firstRes = (first === 'yes') ? 'do' | 'don\'t';
+    const secondRes = (second === 'yes') ?'do' : 'don\'t';
+    console.log(`So you ${firstRes} want tea and you ${secondRes} wan\'t biscuits.`)
+
+
+}
+
 // Test that your first question works.Next, we'll need another reader.question to ask the reader if they'd like some biscuits.The function below won't work with our outlined chronology - try to run it:
 
 // function teaAndBiscuits() {
@@ -77,27 +102,31 @@ function alert_cb(){
 // Ways to Call a Function
 // Create a new file and paste in the following code, which creates Dog and Cat classes.
 
-// function Cat() {
-//     this.name = 'Markov';
-//     this.age = 3;
-// }
+function Cat() {
+    this.name = 'Markov';
+    this.age = 3;
+}
 
-// function Dog() {
-//     this.name = 'Noodles';
-//     this.age = 4;
-// }
+function Dog() {
+    this.name = 'Noodles';
+    this.age = 4;
+}
 
-// Dog.prototype.chase = function (cat) {
-//     console.log(`My name is ${this.name} and I'm chasing ${cat.name}! Woof!`)
-// };
+Dog.prototype.chase = function (cat) {
+    console.log(`My name is ${this.name} and I'm chasing ${cat.name}! Woof!`)
+};
 
-// const Markov = new Cat();
-// const Noodles = new Dog();
-// Let's test out various ways to call Dog.prototype.chase.
+const Markov = new Cat();
+const Noodles = new Dog();
+//Let's test out various ways to call Dog.prototype.chase.
 
 // Start by calling chase method - style on Noodles, passing in Markov(don't worry, Markov escapes, it's all in fun).Note that when we call chase method - style, this is automatically set to Noodles.
 
+Noodles.chase(Markov);
+
 //     Now, let's make things a little bit crazier and use call and apply.
+
+Noodles.chase.call(Markov, Noodles)
 
 // We can use call and apply to change the identity of this.Test out Noodles.chase.call(Markov, Noodles).Noodles.chase just returns a regular function, and when we use call with Markov as our first argument, this is set to Markov! Whoa, cats chasing dogs! apply is similar, but we need to pass it an array of arguments.Try using apply to change the context of Noodles.chase to Markov.
 
