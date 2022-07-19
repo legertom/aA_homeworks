@@ -1,0 +1,28 @@
+<div class="knossos">
+    Knossos
+    <div class="labyrinth">
+        Labyrinth
+        <div class="minotaur">
+            Minotaur
+        </div>
+        Labyrinth
+    </div>
+    Knossos
+</div>
+
+<script>
+    const knossos = document.querySelector('.knossos');
+    knossos.addEventListener('click', () => {
+        alert('Escape!');
+    });
+
+    const labyrinth = document.querySelector('.labyrinth');
+    labyrinth.addEventListener('click', () => {
+        alert('Uh Oh');
+    });
+
+    const minotaur = document.querySelector('.minotaur');
+    minotaur.addEventListener('click', () => {
+        alert('Nom Nom');
+    });
+</script>
